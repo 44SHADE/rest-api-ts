@@ -1,5 +1,7 @@
-import express from "express";
+import UsersController from "./controllers/users.controller";
+import UsersMiddleware from "./middleware/users.middleware";
 import { CommonRoutesConfig } from "../../common/config/common.routes.config";
+import express from "express";
 
 export class UsersRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {
@@ -7,23 +9,34 @@ export class UsersRoutes extends CommonRoutesConfig {
   }
 
   configureRoutes(): express.Application {
+    this._app
+      .route("/users")
+      .get(UsersController.listUsers)
+      .post(
+        UsersMiddleware.validateRequiredUserBodyFields,
+        UsersMiddleware.validateSameEmailDoesntExist,
+        UsersController.createUser
+      );
 
-    this._app.route("/users")
-        .get()
-        .post()
+    this._app.param("userId", UsersMiddleware.extractUserId);
+    this._app
+      .route("/users/:userId")
+      .all(UsersMiddleware.validatUserExist)
+      .get(UsersController.getUserById)
+      .delete(UsersController.removeUser);
 
-    this._app.route("/users/:id")
-        .all()
-        .get()
-        .delete()
+    this._app
+      .route("/users/:userId")
+      .put([
+        UsersMiddleware.validatUserExist,
+        UsersMiddleware.validateSameEmailBelongToSameUser,
+        UsersController.put,
+      ]);
 
-    this._app.route("/users/:id")
-        .put();
+    this._app
+      .route("/users/:userId")
+      .patch([UsersMiddleware.validatePathcEmail, UsersController.patch]);
 
-
-    this._app.route("/users/:id")
-        .patch();
-        
     return this._app;
   }
 }

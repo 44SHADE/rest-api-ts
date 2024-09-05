@@ -1,13 +1,21 @@
-import { Schema, model } from "mongoose";
-import IUser from "../routes/users/dto/user.dto";
+import mongooseService from "../common/services/mongoose.service";
 
-const UserSchema: Schema = new Schema({
-    username: String,
-    password: String,
-}, {
-    timestamps: true
-});
+const Schema = mongooseService.getMongoose().Schema;
 
-const User = model<IUser>("User", UserSchema);
+const UserSchema = new Schema(
+  {
+    _id: { type: String, require: true },
+    username: { type: String, require: true },
+    password: { type: String, require: true },
+    email: { type: String, require: true },
+    permissionLevel: Number,
+  },
+  {
+    timestamps: true,
+    id: false,
+  }
+);
+
+const User = mongooseService.getMongoose().model("User", UserSchema);
 
 export default User;
