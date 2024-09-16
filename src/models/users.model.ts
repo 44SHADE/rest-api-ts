@@ -6,9 +6,9 @@ const UserSchema = new Schema(
   {
     _id: { type: String, require: true },
     username: { type: String, require: true },
-    password: { type: String, require: true },
+    password: { type: String, require: true, select: false },
     email: { type: String, require: true },
-    permissionLevel: Number,
+    permissionFlags: Number,
   },
   {
     timestamps: true,

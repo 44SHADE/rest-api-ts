@@ -19,6 +19,7 @@ class UsersDao {
     const newUser = await User.create({
       _id: userId,
       ...user,
+      permissionFlags: 1,
     });
     await newUser.save();
     return userId;
@@ -41,6 +42,12 @@ class UsersDao {
 
   async getUserById(userId: string) {
     return User.findOne({ _id: userId }).exec();
+  }
+
+  async getUserByEmailWithPassword(email: string) {
+    return User.findOne({ email: email })
+      .select("_id email permissionFlags +password")
+      .exec();
   }
 
   async deleteUserById(userId: string) {

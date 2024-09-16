@@ -28,6 +28,10 @@ class UsersService implements CRUD {
     async getUserByEmail(email: string): Promise<Document | null> {
         return UsersDao.getUserByEmail(email);
     }
+
+    async getUserByEmailWithPassword(email: string): Promise<Document | null> {
+        return UsersDao.getUserByEmailWithPassword(email);
+    }
 }
 
 export default new UsersService();
