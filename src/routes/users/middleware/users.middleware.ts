@@ -35,8 +35,7 @@ class UsersMiddleware {
     res: Response,
     next: NextFunction
   ) {
-    const user = await userService.getUserByEmail(req.body.email);
-    if (user && user.id === req.params.userId) {
+    if ( res.locals.user._id === req.params.userId) {
       next();
     } else {
       res.status(400).json({ error: "Invalid email" });
@@ -54,20 +53,32 @@ class UsersMiddleware {
   async validatUserExist(req: Request, res: Response, next: NextFunction) {
     const user = await userService.readById(req.params.userId);
     if (user) {
+      res.locals.user = user;
       next();
     } else {
       res.status(400).json({ error: `User ${req.params.userId} not found` });
     }
   }
 
-  async extractUserId(
+  async userCantChangePermission(
     req: Request,
     res: Response,
     next: NextFunction
-) {
+  ) {
+    if (
+      "permissionFlags" in req.body &&
+      req.body.permissionFlags !== res.locals.user.PermissionFlags
+    ) {
+      res.status(400).json({ error: ["User cannot change permission."] });
+    } else {
+      next()
+    }
+  }
+
+  async extractUserId(req: Request, res: Response, next: NextFunction) {
     req.body.id = req.params.userId;
     next();
-}
+  }
 }
 
 export default new UsersMiddleware();

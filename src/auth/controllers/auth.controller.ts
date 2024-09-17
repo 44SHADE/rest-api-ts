@@ -24,7 +24,7 @@ class AuthController {
         expiresIn: tokenExpirationSeconds,
       });
 
-      return res.status(201).json({ accsessToken: token, refreshToken: hash });
+      return res.status(201).json({ accessToken: token, refreshToken: hash });
     } catch (error) {
       log(`Create JWT err: %O`, error);
       res.status(500).json({});

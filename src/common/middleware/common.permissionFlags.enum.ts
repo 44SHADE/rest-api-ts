@@ -1,0 +1,6 @@
+export enum PermissionFlags {
+    FREE_PERMISSION = 1,
+    PAID_PERMISSION = 2,
+    CHAT_ADMIN_PERMISSION = 4,
+    FULL_PERMISSION = 2147483647,
+}
