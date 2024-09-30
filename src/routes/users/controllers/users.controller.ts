@@ -17,7 +17,6 @@ class UsersController {
   }
 
   async createUser(req: Request, res: Response) {
-    console.log(req.body);
     req.body.password = await argon2.hash(req.body.password);
     const userId = await userService.create(req.body);
     res.status(201).json({ id: userId });

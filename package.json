@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run build && node --unhandled-rejections=strict build/app.js",
     "start:dev": "npx nodemon",
+    "debug": "export DEBUG=* && npm start",
     "build": "rimraf ./build && tsc"
   },
   "keywords": [],
@@ -18,6 +19,7 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^22.5.1",
     "@types/shortid": "^0.0.32",
+    "@types/socket.io": "^3.0.1",
     "nodemon": "^3.1.4",
     "rimraf": "^6.0.1",
     "source-map-support": "^0.5.21",
@@ -37,6 +39,7 @@
     "mongoose": "^8.6.0",
     "morgan": "^1.10.0",
     "shortid": "^2.2.16",
+    "socket.io": "^4.7.5",
     "winston": "^3.14.2"
   }
 }
