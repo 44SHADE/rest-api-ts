@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  server:
+    image: "rest_api:v1"
+    ports:
+      - "4141:4141"
+    restart: on-failure
+    depends_on:
+      - db
+  db:
+    image: "mongo"
+    volumes:
+      - ./rest_mongo_db:/data/db

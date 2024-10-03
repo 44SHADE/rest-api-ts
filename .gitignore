@@ -1,4 +1,5 @@
 /node_modules
+/rest_mongo_db
 .env
 /build
 .DS_Store

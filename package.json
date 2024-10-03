@@ -1,10 +1,10 @@
 {
   "name": "chat-app",
   "version": "1.0.0",
-  "description": "socket.io + ts + express + node.js = chat app",
+  "description": "rest-api-typescript",
   "main": "app.js",
   "scripts": {
-    "start": "npm run build && node --unhandled-rejections=strict build/app.js",
+    "start:prod": "node --unhandled-rejections=strict build/app.js",
     "start:dev": "npx nodemon",
     "debug": "export DEBUG=* && npm start",
     "build": "rimraf ./build && tsc"
