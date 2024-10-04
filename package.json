@@ -6,7 +6,7 @@
   "scripts": {
     "start:prod": "node --unhandled-rejections=strict build/app.js",
     "start:dev": "npx nodemon",
-    "debug": "export DEBUG=* && npm start",
+    "debug": "export DEBUG=* && npm run start:prod",
     "build": "rimraf ./build && tsc"
   },
   "keywords": [],

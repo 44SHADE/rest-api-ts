@@ -3,5 +3,3 @@
 .env
 /build
 .DS_Store
-src/socket
-src/models/message.model.ts
