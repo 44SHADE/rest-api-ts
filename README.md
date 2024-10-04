@@ -151,7 +151,7 @@ curl "http://localhost:port/users/8LNZkDfSr" \
 ```
 RES: status 204
 ```
-7. **PATCH** /users/:userId - put doc by id (only admin or paid permission level)
+7. **PATCH** /users/:userId - patch doc by id (only admin or paid permission level)
 ```
 curl "http://localhost:4141/users/8LNZkDfSr" \
   -H 'Content-Type: application/json' \
